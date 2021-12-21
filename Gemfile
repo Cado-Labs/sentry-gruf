@@ -5,6 +5,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in sentry_gruf.gemspec
 gemspec
 
+gem "activesupport", "< 7.0.0"
 gem "bundler"
 gem "bundler-audit"
 gem "ci-helper"
