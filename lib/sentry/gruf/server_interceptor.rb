@@ -2,7 +2,18 @@
 
 module Sentry
   module Gruf
+    # Interceptor for Gruf wrapper of gRPC server.
+    # It handles all uncaught exceptions and sent them to the Sentry.
+    # Add this interceptor to the begining of interceptors stack.
+    # @example Use server interceptor
+    #   Gruf.configure do |config|
+    #     config.interceptors.clear
+    #     config.interceptors.use(Sentry::Gruf::ServerInterceptor)
+    #   end
     class ServerInterceptor < ::Gruf::Interceptors::ServerInterceptor
+      # Required method by Gruf interceptor specification.
+      # @see https://rubydoc.info/gems/gruf/Gruf/Interceptors/ServerInterceptor Gruf documentation
+      # @yield Perform request logic
       def call
         yield
       rescue Exception => e

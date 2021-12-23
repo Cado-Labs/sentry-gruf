@@ -154,6 +154,9 @@ GEM
       sequel
       symbiont-ruby
     unicode-display_width (2.1.0)
+    webrick (1.7.0)
+    yard (0.9.27)
+      webrick (~> 1.7.0)
     zeitwerk (2.5.1)
 
 PLATFORMS
@@ -172,6 +175,7 @@ DEPENDENCIES
   sentry-gruf!
   simplecov
   simplecov-lcov
+  yard
 
 BUNDLED WITH
    2.3.0
