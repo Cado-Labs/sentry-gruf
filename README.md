@@ -1,4 +1,4 @@
-# Sentry-Gruf &middot; <a target="_blank" href="https://github.com/Cado-Labs"><img src="https://github.com/Cado-Labs/cado-labs-logos/raw/main/cado_labs_badge.svg" alt="Supported by Cado Labs" style="max-width: 100%; height: 20px"></a>
+# Sentry-Gruf &middot; <a target="_blank" href="https://github.com/Cado-Labs"><img src="https://github.com/Cado-Labs/cado-labs-logos/raw/main/cado_labs_badge.svg" alt="Supported by Cado Labs" style="max-width: 100%; height: 20px"></a> &middot; [![Gem Version](https://badge.fury.io/rb/sentry-gruf.svg)](https://badge.fury.io/rb/sentry-gruf) &middot; [![Coverage Status](https://coveralls.io/repos/github/Cado-Labs/sentry-gruf/badge.svg?branch=master)](https://coveralls.io/github/Cado-Labs/sentry-gruf?branch=master)
 
 Gruf both client and server interceptors, which report bugs to the Sentry.
 
