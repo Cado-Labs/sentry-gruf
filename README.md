@@ -36,6 +36,20 @@ Gruf.configure do |config|
 end
 ```
 
+And for the client side:
+
+```ruby
+client = ::Gruf::Client.new(
+  service: Some::Service,
+  client_options: {
+    interceptors: [Sentry::Gruf::ClientInterceptor.new, OtherInterceptors.new]
+  }
+)
+```
+
+Please note that the interceptor for the client itself does not send errors to Sentry.
+It simply tags some information about the last request made through the client.
+
 ### Contributing
 
  - Fork it ( https://github.com/Cado-Labs/sentry-gruf )

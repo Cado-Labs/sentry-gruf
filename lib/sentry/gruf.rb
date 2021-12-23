@@ -14,3 +14,4 @@ end
 
 require_relative "gruf/version"
 require_relative "gruf/server_interceptor"
+require_relative "gruf/client_interceptor"
