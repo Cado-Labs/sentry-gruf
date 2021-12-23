@@ -5,6 +5,8 @@ require "gruf"
 require "sentry-ruby"
 require "sentry/integrable"
 
+require_relative "gruf/version"
+
 # Namespace, used by the `sentry-ruby-core` gem.
 # @see https://rubydoc.info/gems/sentry-ruby-core Sentry documentation
 module Sentry
@@ -16,6 +18,5 @@ module Sentry
   end
 end
 
-require_relative "gruf/version"
 require_relative "gruf/server_interceptor"
 require_relative "gruf/client_interceptor"

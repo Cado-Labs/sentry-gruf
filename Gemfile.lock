@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    sentry-gruf (1.0.0)
+    sentry-gruf (1.0.1)
       gruf (~> 2.10.0)
-      sentry-ruby-core (~> 4.8.1)
+      sentry-ruby-core (~> 4.8)
 
 GEM
   remote: https://rubygems.org/
