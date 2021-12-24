@@ -29,6 +29,6 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "gruf", "~> 2.10.0"
+  spec.add_dependency "gruf", "~> 2.10"
   spec.add_dependency "sentry-ruby-core", "~> 4.8"
 end
