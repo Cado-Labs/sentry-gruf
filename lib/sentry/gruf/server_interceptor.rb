@@ -17,6 +17,9 @@ module Sentry
       def call
         yield
       rescue Exception => e
+        ignore_error_codes = options[:ignore_error_codes] || []
+        return if e.respond_to?(:code) && ignore_error_codes.include?(e.code.to_s)
+
         ::Sentry.configure_scope do |scope|
           scope.set_transaction_name(request.service_key)
           scope.set_tags(
