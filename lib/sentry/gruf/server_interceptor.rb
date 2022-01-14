@@ -17,6 +17,9 @@ module Sentry
       def call
         yield
       rescue Exception => e
+        sensitive_grpc_codes = options[:sensitive_grpc_codes] || []
+        return if e.is_a?(GRPC::BadStatus) && !sensitive_grpc_codes.include?(e.code.to_s)
+
         ::Sentry.configure_scope do |scope|
           scope.set_transaction_name(request.service_key)
           scope.set_tags(

@@ -31,10 +31,14 @@ For the server side, the installation will look something like this:
 ```ruby
 Gruf.configure do |config|
   config.interceptors.clear # Like config.use_default_interceptors = false
-  config.interceptors.use(Sentry::Gruf::ServerInterceptor)
+  config.interceptors.use(
+    Sentry::Gruf::ServerInterceptor,
+    sensitive_grpc_codes: [2, 5],
+  )
   # Other interceptors go below.
 end
 ```
+where sensitive_grpc_codes is an optional array with codes of GRPC errors which will be reported to the Sentry.
 
 And for the client side:
 
