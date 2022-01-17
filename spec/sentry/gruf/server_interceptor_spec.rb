@@ -48,7 +48,7 @@ describe Sentry::Gruf::ServerInterceptor do
         {
           sensitive_grpc_codes: sensitive_grpc_codes,
         },
-        )
+      )
     end
 
     let(:sensitive_grpc_codes) { %w[1 2] }
