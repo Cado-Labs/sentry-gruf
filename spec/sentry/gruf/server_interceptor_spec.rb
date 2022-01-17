@@ -56,10 +56,10 @@ describe Sentry::Gruf::ServerInterceptor do
     context "when raised exception with code which is ignored" do
       let(:callable) { proc { raise GRPC::InvalidArgument.new } }
 
-      it "doesn't send anything to Sentry" do
+      it "raise exception but doesn't send anything to Sentry" do
         expect(Sentry).not_to receive(:capture_exception)
 
-        run!
+        expect { run! }.to raise_error(StandardError)
       end
     end
 
@@ -82,10 +82,10 @@ describe Sentry::Gruf::ServerInterceptor do
       let(:sensitive_grpc_codes) { [] }
       let(:callable) { proc { raise GRPC::InvalidArgument.new } }
 
-      it "doesn't send anything to Sentry" do
+      it "raise exception but doesn't send anything to Sentry" do
         expect(Sentry).not_to receive(:capture_exception)
 
-        run!
+        expect { run! }.to raise_error(StandardError)
       end
     end
   end
