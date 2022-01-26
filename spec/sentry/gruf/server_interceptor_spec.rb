@@ -39,4 +39,54 @@ describe Sentry::Gruf::ServerInterceptor do
       run!
     end
   end
+
+  context "when sensitive_grpc_codes submitted" do
+    subject(:result) do
+      described_class.new(
+        stubbed_request,
+        error_object,
+        {
+          sensitive_grpc_codes: sensitive_grpc_codes,
+        },
+      )
+    end
+
+    let(:sensitive_grpc_codes) { %w[1 2] }
+
+    context "when raised exception with code which is ignored" do
+      let(:callable) { proc { raise GRPC::InvalidArgument.new } }
+
+      it "raise exception but doesn't send anything to Sentry" do
+        expect(Sentry).not_to receive(:capture_exception)
+
+        expect { run! }.to raise_error(StandardError)
+      end
+    end
+
+    context "when raised exception with code which is not ignored" do
+      let(:sensitive_grpc_codes) { %w[3 16] }
+
+      let(:callable) { proc { raise GRPC::InvalidArgument.new } }
+
+      it "properly handles error" do
+        expect(Sentry::Gruf).to receive(:capture_exception).and_call_original
+
+        expect { run! }.to raise_error(StandardError)
+
+        expect(Sentry.get_current_scope.transaction_name).to eq("service_key")
+        expect(Sentry.get_current_scope.tags.to_json).to be_json_as(expected_tags)
+      end
+    end
+
+    context "with empty sensitive_grpc_codes" do
+      let(:sensitive_grpc_codes) { [] }
+      let(:callable) { proc { raise GRPC::InvalidArgument.new } }
+
+      it "raise exception but doesn't send anything to Sentry" do
+        expect(Sentry).not_to receive(:capture_exception)
+
+        expect { run! }.to raise_error(StandardError)
+      end
+    end
+  end
 end
