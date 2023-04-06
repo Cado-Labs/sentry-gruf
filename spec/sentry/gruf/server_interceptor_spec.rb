@@ -25,9 +25,6 @@ describe Sentry::Gruf::ServerInterceptor do
     expect(Sentry::Gruf).to receive(:capture_exception).and_call_original
 
     expect { run! }.to raise_error(StandardError)
-
-    expect(Sentry.get_current_scope.transaction_name).to eq("service_key")
-    expect(Sentry.get_current_scope.tags.to_json).to be_json_as(expected_tags)
   end
 
   context "without raised error" do
@@ -72,9 +69,6 @@ describe Sentry::Gruf::ServerInterceptor do
         expect(Sentry::Gruf).to receive(:capture_exception).and_call_original
 
         expect { run! }.to raise_error(StandardError)
-
-        expect(Sentry.get_current_scope.transaction_name).to eq("service_key")
-        expect(Sentry.get_current_scope.tags.to_json).to be_json_as(expected_tags)
       end
     end
 

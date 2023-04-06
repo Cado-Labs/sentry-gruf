@@ -31,7 +31,7 @@ module Sentry
             yield
           rescue Exception => e
             sensitive_grpc_codes = options[:sensitive_grpc_codes] || []
-            raise if e.is_a?(GRPC::BadStatus) && sensitive_grpc_codes.exclude?(e.code.to_s)
+            raise if e.is_a?(GRPC::BadStatus) && !sensitive_grpc_codes.include?(e.code.to_s)
 
             ::Sentry::Gruf.capture_exception(e)
 
