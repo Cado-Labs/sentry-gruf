@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "Gruf both client and server interceptors, which report bugs to the Sentry."
   spec.homepage = "https://github.com/Cado-Labs/sentry-gruf"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.required_ruby_version = ">= 2.7.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/Cado-Labs/sentry-gruf"
@@ -29,6 +29,6 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "gruf", "~> 2.10"
+  spec.add_dependency "gruf", "~> 2.12"
   spec.add_dependency "sentry-ruby-core", "~> 4.8"
 end
