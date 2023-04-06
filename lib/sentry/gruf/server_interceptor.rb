@@ -15,23 +15,29 @@ module Sentry
       # @see https://rubydoc.info/gems/gruf/Gruf/Interceptors/ServerInterceptor Gruf documentation
       # @yield Perform request logic
       def call
-        yield
-      rescue Exception => e
-        sensitive_grpc_codes = options[:sensitive_grpc_codes] || []
-        raise if e.is_a?(GRPC::BadStatus) && !sensitive_grpc_codes.include?(e.code.to_s)
+        # make sure the current thread has a clean hub
+        Sentry.clone_hub_to_current_thread
 
-        ::Sentry.configure_scope do |scope|
+        Sentry.with_scope do |scope|
+          scope.clear_breadcrumbs
           scope.set_transaction_name(request.service_key)
           scope.set_tags(
             grpc_method: request.method_key,
             grpc_request_class: request.request_class.name,
             grpc_service_key: request.service_key,
           )
+
+          begin
+            yield
+          rescue Exception => e
+            sensitive_grpc_codes = options[:sensitive_grpc_codes] || []
+            raise if e.is_a?(GRPC::BadStatus) && sensitive_grpc_codes.exclude?(e.code.to_s)
+
+            ::Sentry::Gruf.capture_exception(e)
+
+            raise
+          end
         end
-
-        ::Sentry::Gruf.capture_exception(e)
-
-        raise
       end
     end
   end
