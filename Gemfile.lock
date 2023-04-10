@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sentry-gruf (1.1.0)
+    sentry-gruf (1.2.0)
       gruf (~> 2.12)
       sentry-ruby-core (~> 4.8)
 
@@ -30,10 +30,10 @@ GEM
     docile (1.4.0)
     dry-inflector (0.2.1)
     e2mmap (0.1.0)
-    faraday (2.1.0)
-      faraday-net_http (~> 2.0)
+    faraday (2.7.4)
+      faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
-    faraday-net_http (2.0.1)
+    faraday-net_http (3.0.2)
     google-protobuf (3.22.2)
     google-protobuf (3.22.2-arm64-darwin)
     google-protobuf (3.22.2-x86_64-linux)
@@ -169,4 +169,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   2.3.13
+   2.4.10

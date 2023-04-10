@@ -13,6 +13,6 @@ module Sentry
     # * c is for incremental version, it is updated in other cases
     # According to this, it is enough to specify '~> a.b'
     # if private API was not used and to specify '~> a.b.c' if it was
-    VERSION = "1.1.0"
+    VERSION = "1.2.0"
   end
 end
